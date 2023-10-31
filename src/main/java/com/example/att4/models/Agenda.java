@@ -38,7 +38,7 @@ public class Agenda {
     private String profResponsavel;
     private String nomeCidade;
     private String estado;
-    private int cep;
+    private String cep;
 
     @ManyToOne
     @JoinColumn(name ="professores_id")
