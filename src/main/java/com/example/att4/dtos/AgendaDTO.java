@@ -23,6 +23,11 @@ public class AgendaDTO {
     private String nomeCidade;
     private String estado;
     private String cep;
-    private Integer professores_id;
-    private Integer curso_id;
+
+    private Long professores_id;
+    private Long cursos_id;
+
+    public Long getCursos_id() {
+        return cursos_id;
+    }
 }
