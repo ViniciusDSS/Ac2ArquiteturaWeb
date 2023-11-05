@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import com.example.att4.models.Cursos;
-import com.example.att4.models.Professores;
+
 
 public interface CursoRepository {
  

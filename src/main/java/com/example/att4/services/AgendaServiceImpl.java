@@ -1,9 +1,12 @@
 package com.example.att4.services;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import com.example.att4.dtos.AgendaDTO;
+import com.example.att4.dtos.DadosAgendaDTO;
+import com.example.att4.dtos.ProfessoresDTO;
 import com.example.att4.exceptions.RegraNegocios;
 import com.example.att4.models.Agenda;
 import com.example.att4.models.Cursos;
@@ -43,27 +46,76 @@ public class AgendaServiceImpl implements AgendaService {
        a.setDataFinal(agendaDTO.getDataFinal());
        a.setHoraInicio(agendaDTO.getHoraInicio());
        a.setHoraFim(agendaDTO.getHoraFim());
+       a.setNomeCidade(agendaDTO.getNomeCidade());
+       a.setEstado(agendaDTO.getEstado());
+       a.setCep(agendaDTO.getCep()); 
+        a.setDataInicio(a.getDataInicio() != null ? a.getDataInicio() : LocalDate.now());
+        a.setDataFinal(a.getDataFinal() != null ? a.getDataFinal() : LocalDate.now());
 
-
-	return null;
+            return agendaRepository.save(a);
     }
 
     @Override
-    public AgendaDTO obterAgendaPorId(Long id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'obterAgendaPorId'");
+    public DadosAgendaDTO obterAgendaPorId(Long id) {
+        return agendaRepository.findById(id).map(
+            (Agenda a ) -> {
+                return DadosAgendaDTO.builder()
+                .id(a.getId())
+                .professores(a.getProfessores() != null ? ProfessoresDTO.builder()
+                .id(a.getProfessores().getId())
+                .nome(a.getProfessores().getNome())
+                .cpf(a.getProfessores().getCpf())
+                .rg(a.getProfessores().getRg())
+                .endereco(a.getProfessores().getEndereco())
+                .celular(a.getProfessores().getCelular())
+                .build() : null)
+
+                .dataInicio(a.getDataInicio())
+                .dataFinal(a.getDataFinal())
+                .horaInicio(a.getHoraInicio())
+                .horaFim(a.getHoraFim())
+                .nomeCidade(a.getNomeCidade())
+                .estado(a.getEstado())
+                .cep(a.getCep())
+                .build();
+            }
+        ).orElseThrow(
+            () -> new RegraNegocios("Agenda não encontrada")
+        );
     }
 
     @Override
     public void remover(Long id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'remover'");
+        Agenda agenda = agendaRepository.findById(id).orElseThrow(
+            () -> new RegraNegocios("Agenda não encontrada")
+        );
+        agendaRepository.deleteById(agenda.getId());
     }
 
     @Override
     public void editar(Long id, AgendaDTO agendaDto) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'editar'");
+      Cursos cursos = cursoRepository.findById(agendaDto.getCursos_id()).orElseThrow(
+        () -> new RegraNegocios("O curso não foi encontrado")
+      );
+
+      Professores professores = professoresRepository.findById(agendaDto.getProfessores_id()).orElseThrow(
+        () -> new RegraNegocios("O professor não foi encontrado")
+      );
+      Agenda agenda = agendaRepository.findById(id).orElseThrow(
+        () -> new RegraNegocios("Esta Agenda não foi encotrada")
+      );
+
+      agenda.setCursos(cursos);
+      agenda.setProfessores(professores);
+      agenda.setDataInicio(agendaDto.getDataInicio() != null ? agendaDto.getDataInicio() : LocalDate.now());
+      agenda.setDataFinal(agendaDto.getDataFinal() != null ? agendaDto.getDataFinal() : LocalDate.now());
+      agenda.setHoraInicio(agendaDto.getHoraInicio());
+      agenda.setHoraFim(agendaDto.getHoraFim());
+      agenda.setNomeCidade(agendaDto.getNomeCidade());
+      agenda.setEstado(agendaDto.getEstado());
+      agenda.setCep(agendaDto.getCep());
+
+      agendaRepository.save(agenda);
     }
 
     @Override
