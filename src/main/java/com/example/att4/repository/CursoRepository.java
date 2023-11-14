@@ -15,5 +15,11 @@ public interface CursoRepository {
 
 	Optional<Cursos> findById(Long curso_id);
 
+    Cursos save(Cursos c);
+
+    void deleteById(Long id);
+
+    Optional<Cursos> findAll();
+
  
 }
