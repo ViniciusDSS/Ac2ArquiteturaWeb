@@ -4,7 +4,6 @@ import java.util.Arrays;
 import java.util.*;
 import lombok.Getter;
 
-import lombok.Getter;
 
 public class ApiErros {
     @Getter

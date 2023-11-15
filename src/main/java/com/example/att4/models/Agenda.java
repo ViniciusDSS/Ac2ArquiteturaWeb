@@ -29,6 +29,19 @@ import lombok.ToString;
 @Entity
 public class Agenda {
 
+    public Agenda(String cursoOferecido, LocalDate dataInicio, LocalDate dataFinal, String horaInicio, String horaFim,
+            String profResponsavel, String nomeCidade, String estado, String cep) {
+        this.cursoOferecido = cursoOferecido;
+        this.dataInicio = dataInicio;
+        this.dataFinal = dataFinal;
+        this.horaInicio = horaInicio;
+        this.horaFim = horaFim;
+        this.profResponsavel = profResponsavel;
+        this.nomeCidade = nomeCidade;
+        this.estado = estado;
+        this.cep = cep;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

@@ -52,6 +52,14 @@ private int cargaHoraria;
      @OneToMany(mappedBy = "cursos")
     private List<Agenda> agenda;
 
+    public Cursos(String nome, String descricao, String objetivos, String ementa, int cargaHoraria) {
+        this.nome = nome;
+        this.descricao = descricao;
+        this.objetivos = objetivos;
+        this.ementa = ementa;
+        this.cargaHoraria = cargaHoraria;
+    }
+
     public List<Agenda> getAgenda() {
         return agenda;
     }

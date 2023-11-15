@@ -22,6 +22,15 @@ import lombok.ToString;
 @Getter
 @Setter
 public class Professores {
+    public Professores(String nome, String cpf, String rg, String endereco, String celular, boolean especializacao) {
+        this.nome = nome;
+        this.cpf = cpf;
+        this.rg = rg;
+        this.endereco = endereco;
+        this.celular = celular;
+        this.especializacao = especializacao;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

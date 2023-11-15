@@ -24,7 +24,7 @@ public class ProfressorController {
 
      private ProfessoresService professoresService;
 
-    public ProfessorController(ProfessoresService professoresService){
+    public ProfressorController(ProfessoresService professoresService){
         this.professoresService = professoresService;
     }
 
