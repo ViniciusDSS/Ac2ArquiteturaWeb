@@ -1,4 +1,4 @@
-package com.example.att4.att4;
+package com.example.att4;
 
 import java.time.LocalDate;
 import java.util.Arrays;

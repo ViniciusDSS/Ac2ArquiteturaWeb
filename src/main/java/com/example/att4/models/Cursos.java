@@ -41,6 +41,9 @@ private int cargaHoraria;
     )
     private List<Professores> professores;
 
+    @OneToMany(mappedBy = "professoresCurso")
+    private List<Professores> cursos;
+
     public List<Professores> getProfessores() {
         return professores;
     }

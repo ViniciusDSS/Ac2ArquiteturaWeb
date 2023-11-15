@@ -2,13 +2,21 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Att4Application",
+            "request": "launch",
+            "mainClass": "com.example.att4.Att4Application",
+            "projectName": "att4"
+        },
+        {
+            "type": "java",
             "name": "Spring Boot-Att4Application<att4>",
             "request": "launch",
             "cwd": "${workspaceFolder}",
             "mainClass": "com.example.att4.att4.Att4Application",
             "projectName": "att4",
             "args": "",
-            "envFile": "${workspaceFolder}/.env"
+            "envFile": "${workspaceFolder}/.env",
+            "vmArgs": " -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=50390 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Dspring.jmx.enabled=true -Djava.rmi.server.hostname=localhost -Dspring.application.admin.enabled=true -Dspring.boot.project.name=att4"
         }
     ]
 }
